@@ -1,0 +1,349 @@
+/* Importar fuente moderna y amigable */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+
+:root {
+    --bg-principal: #0f172a;
+    --tarjeta-bg: rgba(30, 41, 59, 0.7);
+    --texto-color: #f8fafc;
+    --neon-morado: #a855f7;
+    --neon-turquesa: #06b6d4;
+    --neon-amarillo: #f59e0b;
+    --neon-verde: #10b981;
+    --neon-rojo: #ef4444;
+    --borde-glow: #3b82f6;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    color: var(--texto-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* Contenedores Principales */
+.contenedor-principal, .contenedor-juego {
+    max-width: 850px;
+    width: 100%;
+    background: var(--tarjeta-bg);
+    backdrop-filter: blur(12px);
+    border: 2px solid var(--borde-glow);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
+    border-radius: 24px;
+    padding: 35px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-top: 0;
+    background: linear-gradient(to right, #3b82f6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.subtitulo, .instruccion {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+/* Barras de información (Vidas, Puntos, Tiempo) */
+.barra-info, .info-juego {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-box, .box-info {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 14px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    min-width: 80px;
+}
+
+.nivel {
+    font-size: 1.1rem;
+    color: var(--neon-turquesa);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* MENÚ DE INICIO: Signos y Rejilla de Niveles */
+.contenedor-signos {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tarjeta-signo {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 15px;
+    width: 120px;
+    transition: transform 0.3s;
+}
+.tarjeta-signo:hover { transform: translateY(-5px); border-color: var(--neon-turquesa); }
+.signo { font-size: 2.2rem; font-weight: 800; color: var(--neon-turquesa); }
+.texto-signo { font-size: 0.85rem; color: #94a3b8; }
+
+.niveles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.nivel-card {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 5px solid #334155;
+    border-radius: 20px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--texto-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+.nivel-card:hover { transform: translateY(-3px); border-color: var(--neon-morado); border-bottom: 5px solid #7e22ce; }
+.nivel-card:active { transform: translateY(2px); border-bottom: 2px solid #7e22ce; }
+.nivel-card span { font-size: 2.2rem; margin-bottom: 8px; transition: transform 0.3s; }
+.nivel-card:hover span { transform: scale(1.15) rotate(5deg); }
+
+/* JUEGO 1: Detective Matemático */
+.contenedor-numeros {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.btn-numero-detective {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 2px solid var(--neon-turquesa);
+    border-bottom: 5px solid #0891b2;
+    border-radius: 16px;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+.btn-numero-detective:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3); }
+.btn-numero-detective:active { transform: translateY(3px); border-bottom: 2px solid #0891b2; }
+
+/* JUEGO 2: Carrera de Cohetes */
+.pista-cohete {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 16px;
+    padding: 15px;
+    margin-bottom: 30px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cohete-container {
+    width: 100%;
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+#cohete {
+    font-size: 2rem;
+    position: absolute;
+    left: 0%;
+    transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.linea-meta {
+    position: absolute;
+    right: 10px;
+    font-size: 1.5rem;
+}
+
+.comparacion, .secuencia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 35px 0;
+}
+
+.numero-grande, .numero-secuencia {
+    background: #1e293b;
+    border: 2px solid var(--borde-glow);
+    padding: 15px 25px;
+    border-radius: 16px;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: white;
+    min-width: 90px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.signo-pregunta {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--neon-amarillo);
+    background: rgba(245, 158, 11, 0.1);
+    border: 2px dashed var(--neon-amarillo);
+    padding: 15px 25px;
+    border-radius: 16px;
+}
+
+.botones-signo, .botones-opcion, .opciones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-signo, .btn-opcion, .btn-principal, .btn-batalla, button {
+    background: linear-gradient(145deg, #2563eb, #1d4ed8);
+    border: none;
+    border-bottom: 5px solid #1e40af;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.1s ease;
+}
+.btn-signo:hover, .btn-opcion:hover, .btn-principal:hover, .btn-batalla:hover, button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+}
+.btn-signo:active, .btn-opcion:active, .btn-principal:active, .btn-batalla:active, button:active {
+    transform: translateY(3px);
+    border-bottom: 2px solid #1e40af;
+}
+
+/* JUEGO 3: El Tesoro Ordenado (Drag & Drop) */
+.contenedor-tesoros {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    min-height: 110px;
+    background: rgba(15, 23, 42, 0.4);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.tesoro-card {
+    background: linear-gradient(145deg, #d97706, #b45309);
+    border-bottom: 5px solid #78350f;
+    border-radius: 16px;
+    padding: 15px 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    cursor: grab;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.tesoro-card:active { cursor: grabbing; }
+
+.zona-orden {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.casilla-vacia {
+    width: 90px;
+    height: 95px;
+    border: 2px dashed var(--neon-turquesa);
+    background: rgba(6, 182, 212, 0.05);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-principal {
+    background: linear-gradient(145deg, #10b981, #047857);
+    border-bottom: 5px solid #065f46;
+    font-size: 1.3rem;
+}
+
+/* JUEGO 5: Batalla Matemática */
+.batalla {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.personaje {
+    background: rgba(15, 23, 42, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 20px;
+    width: 180px;
+}
+.personaje .emoji { font-size: 3rem; }
+.personaje h2 { margin: 10px 0; font-size: 1.4rem; }
+
+.numero-batalla {
+    background: #1e293b;
+    font-size: 2.2rem;
+    font-weight: 800;
+    padding: 15px;
+    border-radius: 14px;
+    border: 2px solid var(--neon-morado);
+}
+
+.vs { font-size: 2rem; font-weight: 900; color: var(--neon-rojo); }
+
+.botones-batalla .btn-batalla {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+}
+
+/* JUEGO 6: Misión Final */
+.pregunta-grande {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 30px 0;
+    letter-spacing: 2px;
+}
+
+/* Sistema de feedback textual */
+#mensaje {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 25px;
+    min-height: 30px;
+    transition: transform 0.2s ease;
+}

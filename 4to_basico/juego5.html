@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Juego 5 - Batalla Matemática</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="contenedor-juego">
+
+    <h1>⚔️ Batalla Matemática</h1>
+
+    <div class="info-juego">
+
+        <div class="box-info">
+            ❤️ <span id="vidas">3</span>
+        </div>
+
+        <div class="box-info">
+            ⭐ <span id="puntaje">0</span>
+        </div>
+
+        <div class="box-info">
+            🏆 Nivel <span id="nivel">1</span>/10
+        </div>
+
+    </div>
+
+    <p class="instruccion">
+        ¿Quién tiene el número mayor?
+    </p>
+
+    <div class="batalla">
+
+        <div class="personaje">
+
+            <div class="emoji">
+                🐷
+            </div>
+
+            <h2>Peppa</h2>
+
+            <div class="numero-batalla"
+                 id="numeroPeppa">
+
+                0
+
+            </div>
+
+        </div>
+
+        <div class="vs">
+            VS
+        </div>
+
+        <div class="personaje">
+
+            <div class="emoji">
+                🦖
+            </div>
+
+            <h2>George</h2>
+
+            <div class="numero-batalla"
+                 id="numeroGeorge">
+
+                0
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="botones-batalla">
+
+        <button class="btn-batalla"
+                onclick="responder('peppa')">
+
+            🐷 Peppa
+
+        </button>
+
+        <button class="btn-batalla"
+                onclick="responder('igual')">
+
+            🤝 Igual
+
+        </button>
+
+        <button class="btn-batalla"
+                onclick="responder('george')">
+
+            🦖 George
+
+        </button>
+
+    </div>
+
+    <p id="mensaje"></p>
+
+</div>
+
+<script>
+
+let vidas = 3;
+let puntaje = 0;
+let nivel = 1;
+
+let numeroPeppa = 0;
+let numeroGeorge = 0;
+
+let respuestaCorrecta = "";
+
+function generarRonda() {
+
+    document.getElementById("nivel").textContent = nivel;
+
+    document.getElementById("mensaje").textContent = "";
+
+    if (nivel <= 3) {
+
+        numeroPeppa = Math.floor(Math.random() * 90) + 10;
+        numeroGeorge = Math.floor(Math.random() * 90) + 10;
+
+    }
+
+    else {
+
+        numeroPeppa = Math.floor(Math.random() * 900) + 100;
+        numeroGeorge = Math.floor(Math.random() * 900) + 100;
+
+    }
+
+    if (nivel >= 5 && Math.random() < 0.3) {
+
+        numeroGeorge = numeroPeppa;
+
+    }
+
+    document.getElementById("numeroPeppa").textContent =
+    numeroPeppa;
+
+    document.getElementById("numeroGeorge").textContent =
+    numeroGeorge;
+
+    if (numeroPeppa > numeroGeorge) {
+
+        respuestaCorrecta = "peppa";
+
+    }
+
+    else if (numeroGeorge > numeroPeppa) {
+
+        respuestaCorrecta = "george";
+
+    }
+
+    else {
+
+        respuestaCorrecta = "igual";
+
+    }
+
+}
+
+function responder(respuesta) {
+
+    const mensaje =
+    document.getElementById("mensaje");
+
+    if (respuesta === respuestaCorrecta) {
+
+        puntaje += 10;
+
+        document.getElementById(
+            "puntaje"
+        ).textContent = puntaje;
+
+        mensaje.textContent =
+        "🎉 ¡Correcto!";
+
+        mensaje.style.color =
+        "green";
+
+        confetti({
+
+            particleCount: 80,
+
+            spread: 70
+
+        });
+
+        nivel++;
+
+        if (nivel > 10) {
+
+            finalizarJuego();
+
+            return;
+
+        }
+
+        setTimeout(() => {
+
+            generarRonda();
+
+        }, 1200);
+
+    }
+
+    else {
+
+        vidas--;
+
+        document.getElementById(
+            "vidas"
+        ).textContent = vidas;
+
+        mensaje.textContent =
+        "❌ Intenta nuevamente";
+
+        mensaje.style.color =
+        "red";
+
+        if (vidas <= 0) {
+
+            document.querySelector(
+                ".contenedor-juego"
+            ).innerHTML = `
+
+                <h1>💔 Fin del juego</h1>
+
+                <h2>Te quedaste sin vidas</h2>
+
+                <br>
+
+                <button onclick="location.reload()">
+
+                    Intentar nuevamente
+
+                </button>
+
+            `;
+
+        }
+
+    }
+
+}
+
+function finalizarJuego() {
+
+let total =
+parseInt(
+localStorage.getItem(
+"puntajeTotal"
+)
+) || 0;
+
+localStorage.setItem(
+"puntajeTotal",
+total + puntaje
+);
+
+    confetti({
+
+        particleCount: 250,
+
+        spread: 120
+
+    });
+
+    document.querySelector(
+        ".contenedor-juego"
+    ).innerHTML = `
+
+        <h1>🏆 ¡Campeón Matemático!</h1>
+
+        <h2>
+
+            Has aprendido a comparar números.
+
+        </h2>
+
+        <br>
+
+        <h3>
+
+            Puntaje Final: ${puntaje}
+
+        </h3>
+
+        <br>
+
+        <button onclick="location.href='juego6.html'">
+
+            Ir al Juego 6 →
+
+        </button>
+
+    `;
+
+}
+
+generarRonda();
+
+</script>
+
+</body>
+</html>

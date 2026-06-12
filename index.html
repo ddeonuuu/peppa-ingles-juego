@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Peppa English Kids</title>
+
+    <link rel="icon" href="imagenes/peppa.jpg">
+
+    <link rel="stylesheet" href="css_peppa/style.css">
+</head>
+
+<body>
+
+<div class="contenedor-principal borde-rosa">
+
+    <img src="imagenes/peppa.jpg"
+         class="logo-login"
+         alt="Peppa">
+
+    <h1>Peppa English Kids</h1>
+
+    <p class="subtitulo">
+        Aprende inglés con Peppa y sus amigos ✨
+    </p>
+
+    <div class="input-contenedor">
+
+        <input type="text"
+               id="nombre"
+               placeholder="✏️ Escribe tu nombre">
+
+    </div>
+
+    <h2 class="titulo-avatar">
+        Select your avatar:
+    </h2>
+
+    <div class="grid-avatares">
+
+        <div class="avatar-opcion"
+             onclick="seleccionarAvatar(this)">
+            <img src="imagenes/peppa.jpg">
+        </div>
+
+        <div class="avatar-opcion"
+             onclick="seleccionarAvatar(this)">
+            <img src="imagenes/george.jpg">
+        </div>
+
+        <div class="avatar-opcion"
+             onclick="seleccionarAvatar(this)">
+            <img src="imagenes/mama_cerdita.jpg">
+        </div>
+
+        <div class="avatar-opcion"
+             onclick="seleccionarAvatar(this)">
+            <img src="imagenes/papa_cerdito.jpg">
+        </div>
+
+        <div class="avatar-opcion"
+             onclick="seleccionarAvatar(this)">
+            <img src="imagenes/primo_peppa.jpg">
+        </div>
+
+        <div class="avatar-opcion"
+             onclick="seleccionarAvatar(this)">
+            <img src="imagenes/peppa_frog.jpg">
+        </div>
+
+    </div>
+
+<a href="bienvenida.html" class="btn-ui btn-azul">Entrar➔</a>
+
+</div>
+
+<canvas id="confetti"
+        style="position:fixed;
+               top:0;
+               left:0;
+               width:100%;
+               height:100%;
+               pointer-events:none;
+               z-index:999;">
+</canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script src="js_peppa/script.js"></script>
+
+</body>
+</html>

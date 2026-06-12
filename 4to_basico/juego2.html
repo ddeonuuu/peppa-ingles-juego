@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego 2 - Carrera de Cohetes</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+<div class="contenedor-juego">
+
+    <h1>🚀 Carrera de Cohetes</h1>
+
+    <p class="subtitulo">
+        Elige el signo correcto para ayudar a Peppa a llegar a la meta.
+    </p>
+
+    <!-- Barra de información -->
+    <div class="barra-info">
+
+        <div class="info-box">
+            ❤️ <span id="vidas">3</span>
+        </div>
+
+        <div class="info-box">
+            ⭐ <span id="puntaje">0</span>
+        </div>
+
+        <div class="info-box">
+            Nivel <span id="nivel">1</span>/5
+        </div>
+
+    </div>
+
+    <!-- Pista del cohete -->
+    <div class="pista-cohete">
+
+        <div class="cohete-container">
+
+            <span id="cohete">🚀</span>
+
+            <div class="linea-meta">
+                🏁
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Comparación -->
+    <div class="comparacion">
+
+        <span id="numero1" class="numero-grande">
+            000
+        </span>
+
+        <span class="signo-pregunta">
+            ?
+        </span>
+
+        <span id="numero2" class="numero-grande">
+            000
+        </span>
+
+    </div>
+
+    <!-- Botones -->
+    <div class="botones-signo">
+
+        <button class="btn-signo"
+                onclick="verificarCohete('>')">
+            >
+        </button>
+
+        <button class="btn-signo"
+                onclick="verificarCohete('<')">
+            <
+        </button>
+
+        <button class="btn-signo"
+                onclick="verificarCohete('=')">
+            =
+        </button>
+
+    </div>
+
+    <p id="mensaje"></p>
+
+</div>
+
+<script src="js/script.js"></script>
+
+<script>
+    iniciarCohetes();
+</script>
+
+</body>
+</html>

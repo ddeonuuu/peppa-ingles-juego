@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome</title>
+
+    <link rel="stylesheet" href="css_peppa/style.css">
+
+</head>
+
+<body>
+
+<div class="contenedor-principal borde-azul">
+
+    <img id="avatarMostrado"
+         class="logo-login"
+         style="border-color:#38bdf8;">
+
+    <h1 id="saludo"
+        style="color:#38bdf8;">
+    </h1>
+
+    <p id="mensajePregunta"
+       class="subtitulo">
+    </p>
+
+    <div class="menu-actividades">
+
+        <a href="actividad1.html"
+           class="opcion-menu">
+
+           🎨 Colors (Colores)
+
+        </a>
+
+        <a href="#"
+           class="opcion-menu"
+           style="opacity:0.5; cursor:not-allowed;"
+           onclick="alert('¡Próximamente!')">
+
+           🦁 Animals (Animales)
+
+        </a>
+
+        <a href="#"
+           class="opcion-menu"
+           style="opacity:0.5; cursor:not-allowed;"
+           onclick="alert('¡Próximamente!')">
+
+           🔢 Numbers (Números)
+
+        </a>
+
+    <a href="4to_basico/basico4.html" class="btn-ui btn-azul">Juegos 4° Básico ➔</a>
+
+    </div>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    let nombre =
+        localStorage.getItem("nombre") || "Friend";
+
+    let avatar =
+        localStorage.getItem("avatar") ||
+        "imagenes/peppa.jpg";
+
+    document.getElementById("saludo")
+        .innerHTML =
+        `Welcome, ${nombre}! ✨`;
+
+    document.getElementById("mensajePregunta")
+        .innerHTML =
+        `¿Listo para aprender inglés hoy?`;
+
+    document.getElementById("avatarMostrado")
+        .src = avatar;
+
+});
+
+</script>
+
+<script src="js_peppa/script.js"></script>
+
+</body>
+</html>

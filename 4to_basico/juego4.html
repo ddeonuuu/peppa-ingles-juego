@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Juego 4 - Completa la Secuencia</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="contenedor-juego">
+
+    <h1>🔢 Juego 4 - Completa la Secuencia</h1>
+
+    <div class="info-juego">
+
+        <div class="box-info">
+            ❤️ <span id="vidas">3</span>
+        </div>
+
+        <div class="box-info">
+            ⭐ <span id="puntaje">0</span>
+        </div>
+
+        <div class="box-info">
+            🏆 Nivel <span id="nivel">1</span>/5
+        </div>
+
+    </div>
+
+    <p class="instruccion">
+        Completa la secuencia seleccionando el número correcto.
+    </p>
+
+    <div class="secuencia" id="secuencia"></div>
+
+    <div class="opciones" id="opciones"></div>
+
+    <p id="mensaje"></p>
+
+</div>
+
+<script>
+
+let vidas = 3;
+let puntaje = 0;
+let nivelActual = 0;
+
+const niveles = [
+
+    {inicio: 20, salto: 10, longitud: 4},
+    {inicio: 100, salto: 50, longitud: 4},
+    {inicio: 300, salto: 100, longitud: 4},
+    {inicio: 150, salto: 50, longitud: 5},
+    {inicio: 450, salto: 100, longitud: 5}
+
+];
+
+let respuestaCorrecta = 0;
+
+function cargarNivel() {
+
+    if (nivelActual >= niveles.length) {
+        finalizarJuego();
+        return;
+    }
+
+    document.getElementById("nivel").textContent =
+    nivelActual + 1;
+
+    document.getElementById("mensaje").textContent = "";
+
+    const datos = niveles[nivelActual];
+
+    let secuencia = [];
+
+    for (let i = 0; i < datos.longitud; i++) {
+
+        secuencia.push(
+            datos.inicio + (i * datos.salto)
+        );
+
+    }
+
+    let posicionOculta = Math.floor(
+        Math.random() * secuencia.length
+    );
+
+    respuestaCorrecta =
+    secuencia[posicionOculta];
+
+    secuencia[posicionOculta] = "___";
+
+    const contenedorSecuencia =
+    document.getElementById("secuencia");
+
+    contenedorSecuencia.innerHTML = "";
+
+    secuencia.forEach(numero => {
+
+        const div =
+        document.createElement("div");
+
+        div.className =
+        "numero-secuencia";
+
+        div.textContent = numero;
+
+        contenedorSecuencia.appendChild(div);
+
+    });
+
+    generarOpciones();
+}
+
+function generarOpciones() {
+
+    const contenedor =
+    document.getElementById("opciones");
+
+    contenedor.innerHTML = "";
+
+    let opciones = [respuestaCorrecta];
+
+    while(opciones.length < 3){
+
+        let incorrecta =
+        respuestaCorrecta +
+        (Math.floor(Math.random() * 5) - 2) * 50;
+
+        if(
+            incorrecta > 0 &&
+            !opciones.includes(incorrecta)
+        ){
+            opciones.push(incorrecta);
+        }
+
+    }
+
+    opciones.sort(() => Math.random() - 0.5);
+
+    opciones.forEach(numero => {
+
+        const boton =
+        document.createElement("button");
+
+        boton.className =
+        "btn-opcion";
+
+        boton.textContent = numero;
+
+        boton.onclick = () =>
+        verificar(numero);
+
+        contenedor.appendChild(boton);
+
+    });
+
+}
+
+function verificar(numero){
+
+    const mensaje =
+    document.getElementById("mensaje");
+
+    if(numero === respuestaCorrecta){
+
+        puntaje += 10;
+
+        document.getElementById(
+            "puntaje"
+        ).textContent = puntaje;
+
+        mensaje.textContent =
+        "🎉 ¡Correcto!";
+
+        mensaje.style.color =
+        "green";
+
+        confetti({
+            particleCount: 80,
+            spread: 70
+        });
+
+        nivelActual++;
+
+        setTimeout(() => {
+
+            cargarNivel();
+
+        }, 1500);
+
+    }
+
+    else{
+
+        vidas--;
+
+        document.getElementById(
+            "vidas"
+        ).textContent = vidas;
+
+        mensaje.textContent =
+        "❌ Intenta nuevamente";
+
+        mensaje.style.color =
+        "red";
+
+        if(vidas <= 0){
+
+            document.querySelector(
+                ".contenedor-juego"
+            ).innerHTML = `
+
+                <h1>💔 Fin del juego</h1>
+
+                <h2>
+                    Te quedaste sin vidas
+                </h2>
+
+                <br>
+
+                <button
+                onclick="location.reload()">
+
+                    Intentar otra vez
+
+                </button>
+
+            `;
+
+            return;
+        }
+
+    }
+
+}
+
+function finalizarJuego(){
+
+let total =
+parseInt(
+localStorage.getItem(
+"puntajeTotal"
+)
+) || 0;
+
+localStorage.setItem(
+"puntajeTotal",
+total + puntaje
+);
+
+    confetti({
+        particleCount: 250,
+        spread: 120
+    });
+
+    document.querySelector(
+        ".contenedor-juego"
+    ).innerHTML = `
+
+        <h1>
+            🏆 ¡Excelente!
+        </h1>
+
+        <h2>
+            Has completado las secuencias numéricas
+        </h2>
+
+        <br>
+
+        <h3>
+            Puntaje final: ${puntaje}
+        </h3>
+
+        <br>
+
+        <button
+        onclick="location.href='juego5.html'">
+
+            Ir al Juego 5 →
+        </button>
+
+    `;
+
+}
+
+cargarNivel();
+
+</script>
+
+</body>
+</html>

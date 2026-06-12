@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Color Game 🎨</title>
+
+    <!-- FAVICON -->
+
+    <link rel="icon"
+          href="imagenes/favicon.png">
+
+    <link rel="stylesheet"
+          href="css_peppa/style2.css">
+
+</head>
+
+<body>
+
+<div class="contenedor-juego borde-verde">
+
+    <!-- =========================
+    BIENVENIDA
+    ========================= -->
+
+    <div id="pantallaBienvenida"
+         class="pantalla-bienvenida">
+
+        <img src="imagenes/peppa.jpg"
+             class="logo-login">
+
+        <h1>Welcome to the Color Game! 🎨</h1>
+
+        <div class="emoji-grande">
+            🖍️
+        </div>
+
+        <p class="texto-explicacion">
+
+            Drag the correct color into the box.
+
+        </p>
+
+        <div class="mini-colores">
+
+            <div class="mini-color"
+                 style="background:#ef4444;"></div>
+
+            <div class="mini-color"
+                 style="background:#3b82f6;"></div>
+
+            <div class="mini-color"
+                 style="background:#ec4899;"></div>
+
+            <div class="mini-color"
+                 style="background:#eab308;"></div>
+
+            <div class="mini-color"
+                 style="background:#22c55e;"></div>
+
+        </div>
+
+        <p class="texto-explicacion">
+
+            RED • BLUE • PINK • YELLOW • GREEN
+
+        </p>
+
+        <h3 style="margin-top:20px;">
+
+            Choose Level ⭐
+
+        </h3>
+
+        <button class="btn-ui btn-verde"
+                onclick="iniciarJuego('easy')">
+
+            Easy 😊
+
+        </button>
+
+        <button class="btn-ui btn-azul"
+                onclick="iniciarJuego('medium')">
+
+            Medium 😎
+
+        </button>
+
+        <button class="btn-ui btn-morado"
+                onclick="iniciarJuego('hard')">
+
+            Hard 😱
+
+        </button>
+
+    </div>
+
+    <!-- =========================
+    JUEGO
+    ========================= -->
+
+    <div id="pantallaJuego"
+         class="pantalla-juego">
+
+        <h1>Drag the Color 🎨</h1>
+
+        <div class="barra-info">
+
+            <div>
+
+                ⏰ Time:
+                <span id="temporizador">10</span>
+
+            </div>
+
+            <div>
+
+                ⭐ Round:
+                <span id="rondaTexto">1</span>/10
+
+            </div>
+
+        </div>
+
+        <div class="barra-info">
+
+            <div>
+
+                🎯 Level:
+                <span id="nivelTexto">Easy</span>
+
+            </div>
+
+        </div>
+
+        <!-- OBJETIVO -->
+
+        <div id="objetivo"
+             class="objetivo-color">
+
+            RED
+
+        </div>
+
+        <!-- COLORES -->
+
+        <div class="contenedor-colores">
+
+            <div class="color-arrastrable"
+                 draggable="true"
+                 data-color="RED"
+                 style="background:#ef4444;">
+            </div>
+
+            <div class="color-arrastrable"
+                 draggable="true"
+                 data-color="BLUE"
+                 style="background:#3b82f6;">
+            </div>
+
+            <div class="color-arrastrable"
+                 draggable="true"
+                 data-color="PINK"
+                 style="background:#ec4899;">
+            </div>
+
+            <div class="color-arrastrable"
+                 draggable="true"
+                 data-color="YELLOW"
+                 style="background:#eab308;">
+            </div>
+
+            <div class="color-arrastrable"
+                 draggable="true"
+                 data-color="GREEN"
+                 style="background:#22c55e;">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+    FINAL
+    ========================= -->
+
+    <div id="pantallaFinal"
+         class="pantalla-final">
+
+        <h1 id="tituloFinal">
+
+            Congratulations 🎉
+
+        </h1>
+
+        <div class="emoji-grande">
+
+            🏆
+
+        </div>
+
+        <p id="textoFinal"
+           class="texto-explicacion">
+
+            You completed the activity!
+
+        </p>
+
+        <h2 style="margin-top:20px;">
+
+            ⭐ Final Score:
+            <span id="puntajeFinal">0</span>
+
+        </h2>
+
+        <button id="botonFinal"
+                class="btn-ui btn-azul">
+
+            Continue ➜
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =========================
+AUDIOS
+========================= -->
+
+<audio id="audioCorrecto">
+    <source src="sonidos/Muy_Bien.mp3"
+            type="audio/mpeg">
+</audio>
+
+<audio id="audioError">
+    <source src="sonidos/intentalo_nuevamente.mp3"
+            type="audio/mpeg">
+</audio>
+
+<audio id="audioLogro">
+    <source src="sonidos/felicitaciones.mp3"
+            type="audio/mpeg">
+</audio>
+
+<script src="js_peppa/script2.js"></script>
+
+</body>
+</html>

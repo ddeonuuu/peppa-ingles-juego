@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body onload="mostrarPantallaFinal()">
+
+<div class="contenedor-final borde-verde">
+
+    <h1>
+        ¡Felicitaciones!
+    </h1>
+
+    <h2>
+        Completaste todos los juegos 🎉
+    </h2>
+
+    <div class="estrellas">
+        ⭐ ⭐ ⭐
+    </div>
+
+    <div class="puntaje-final">
+        Puntaje Total:
+        <span id="puntajeFinal">0</span>
+    </div>
+
+    <br>
+
+    <button class="btn-ui btn-azul"
+        onclick="reiniciarJuego()">
+
+    Jugar Otra Vez
+
+</button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

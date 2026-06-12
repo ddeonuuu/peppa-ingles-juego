@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego 3 - El Tesoro Ordenado</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+<div class="contenedor-juego">
+
+    <h1>💎 El Tesoro Ordenado</h1>
+
+    <p class="subtitulo">
+        Arrastra los tesoros para ordenarlos de menor a mayor.
+    </p>
+
+    <!-- Barra de información -->
+    <div class="barra-info">
+
+        <div class="info-box">
+            ❤️ <span id="vidas">3</span>
+        </div>
+
+        <div class="info-box">
+            ⭐ <span id="puntaje">0</span>
+        </div>
+
+        <div class="info-box">
+            Nivel <span id="nivel">1</span>/5
+        </div>
+
+    </div>
+
+    <!-- Cofres arrastrables -->
+    <div class="contenedor-tesoros"
+         id="contenedorTesoros">
+
+    </div>
+
+    <!-- Casillas para ordenar -->
+    <div class="zona-orden"
+         id="zonaOrden">
+
+    </div>
+
+    <button class="btn-principal"
+            onclick="comprobarTesoro()">
+
+        Comprobar Orden
+
+    </button>
+
+    <p id="mensaje"></p>
+
+</div>
+
+<script src="js/script.js"></script>
+
+<script>
+    iniciarTesoro();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Juego 6 - Misión Final Matemática</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="contenedor-juego">
+
+    <h1>🏆 Misión Final Matemática</h1>
+
+    <div class="info-juego">
+
+        <div class="box-info">
+            ❤️ <span id="vidas">3</span>
+        </div>
+
+        <div class="box-info">
+            ⭐ <span id="puntaje">0</span>
+        </div>
+
+        <div class="box-info">
+            ⏰ <span id="tiempo">60</span>s
+        </div>
+
+    </div>
+
+    <h2 id="tituloRonda">Ronda 1: Compara los números</h2>
+
+    <div id="zonaJuego">
+
+    </div>
+
+    <p id="mensaje"></p>
+
+</div>
+
+<script>
+
+let vidas = 3;
+let puntaje = 0;
+let tiempo = 60;
+
+let ronda = 1;
+let preguntasRespondidas = 0;
+let respuestaCorrecta = null;
+
+// TEMPORIZADOR
+
+const temporizador = setInterval(() => {
+
+    tiempo--;
+
+    document.getElementById("tiempo").textContent = tiempo;
+
+    if(tiempo <= 0){
+
+        clearInterval(temporizador);
+        finalizarJuego();
+
+    }
+
+},1000);
+
+// INICIAR
+
+cargarRonda();
+
+function cargarRonda(){
+
+    document.getElementById("mensaje").textContent = "";
+
+    if(ronda === 1){
+
+        document.getElementById("tituloRonda").textContent =
+        "Ronda 1: Compara los números";
+
+        cargarComparacion();
+
+    }
+
+    else if(ronda === 2){
+
+        document.getElementById("tituloRonda").textContent =
+        "Ronda 2: Completa la secuencia";
+
+        cargarSecuencia();
+
+    }
+
+    else if(ronda === 3){
+
+        document.getElementById("tituloRonda").textContent =
+        "Ronda 3: Encuentra el mayor";
+
+        cargarMayor();
+
+    }
+
+    else{
+
+        clearInterval(temporizador);
+        finalizarJuego();
+
+    }
+
+}
+
+// RONDA 1
+
+function cargarComparacion(){
+
+    let n1 = Math.floor(Math.random()*900)+100;
+    let n2 = Math.floor(Math.random()*900)+100;
+
+    if(Math.random() < 0.2){
+        n2 = n1;
+    }
+
+    if(n1 > n2) respuestaCorrecta = ">";
+    else if(n1 < n2) respuestaCorrecta = "<";
+    else respuestaCorrecta = "=";
+
+    document.getElementById("zonaJuego").innerHTML = `
+        <div class="pregunta-grande">
+            ${n1} ? ${n2}
+        </div>
+
+        <div class="botones-opcion">
+
+            <button onclick="verificar('>')">></button>
+
+            <button onclick="verificar('<')"><</button>
+
+            <button onclick="verificar('=')">=</button>
+
+        </div>
+    `;
+
+}
+
+// RONDA 2
+
+function cargarSecuencia(){
+
+    let inicio = Math.floor(Math.random()*10+1)*100;
+    let salto = 100;
+
+    let secuencia = [];
+
+    for(let i=0;i<4;i++){
+
+        secuencia.push(
+            inicio + (i*salto)
+        );
+
+    }
+
+    let posicion = 1;
+
+    respuestaCorrecta = secuencia[posicion];
+
+    secuencia[posicion] = "___";
+
+    let opciones = [respuestaCorrecta];
+
+    while(opciones.length < 3){
+
+        let n = respuestaCorrecta +
+                (Math.floor(Math.random()*5)-2)*50;
+
+        if(n > 0 &&
+           !opciones.includes(n)){
+
+            opciones.push(n);
+
+        }
+
+    }
+
+    opciones.sort(()=>Math.random()-0.5);
+
+    document.getElementById("zonaJuego").innerHTML = `
+
+        <div class="pregunta-grande">
+
+            ${secuencia.join(" - ")}
+
+        </div>
+
+        <div class="botones-opcion">
+
+            ${opciones.map(op=>`
+                <button onclick="verificar(${op})">
+                    ${op}
+                </button>
+            `).join("")}
+
+        </div>
+
+    `;
+
+}
+
+// RONDA 3
+
+function cargarMayor(){
+
+    let numeros = [];
+
+    for(let i=0;i<3;i++){
+
+        numeros.push(
+            Math.floor(Math.random()*900)+100
+        );
+
+    }
+
+    respuestaCorrecta = Math.max(...numeros);
+
+    numeros.sort(()=>Math.random()-0.5);
+
+    document.getElementById("zonaJuego").innerHTML = `
+
+        <div class="botones-opcion">
+
+            ${numeros.map(num=>`
+                <button onclick="verificar(${num})">
+                    ${num}
+                </button>
+            `).join("")}
+
+        </div>
+
+    `;
+
+}
+
+// VERIFICAR
+
+function verificar(respuesta){
+
+    const mensaje =
+    document.getElementById("mensaje");
+
+    if(respuesta == respuestaCorrecta){
+
+        puntaje += 10;
+
+        document.getElementById("puntaje")
+        .textContent = puntaje;
+
+        mensaje.textContent =
+        "🎉 ¡Correcto!";
+
+        mensaje.style.color =
+        "green";
+
+        confetti({
+
+            particleCount: 50,
+            spread: 60
+
+        });
+
+    }
+
+    else{
+
+        vidas--;
+
+        document.getElementById("vidas")
+        .textContent = vidas;
+
+        mensaje.textContent =
+        "❌ Incorrecto";
+
+        mensaje.style.color =
+        "red";
+
+        if(vidas <= 0){
+
+            clearInterval(temporizador);
+
+            finalizarJuego();
+
+            return;
+
+        }
+
+    }
+
+    preguntasRespondidas++;
+
+    if(preguntasRespondidas >= 5){
+
+        ronda++;
+        preguntasRespondidas = 0;
+
+    }
+
+    setTimeout(() => {
+
+        cargarRonda();
+
+    }, 1000);
+
+}
+
+// FINALIZAR
+
+function finalizarJuego(){
+
+    let titulo = "";
+    let mensaje = "";
+
+    if(puntaje === 150){
+
+        titulo =
+        "🌟 Maestro Matemático Supremo 🌟";
+
+        mensaje =
+        "¡Has obtenido la puntuación perfecta!";
+
+    }
+
+    else if(puntaje >= 120){
+
+        titulo =
+        "🏆 Excelente trabajo";
+
+        mensaje =
+        "¡Eres un experto en matemáticas!";
+
+    }
+
+    else{
+
+        titulo =
+        "🎉 Buen esfuerzo";
+
+        mensaje =
+        "Sigue practicando para mejorar.";
+
+    }
+
+// GUARDAR PUNTAJE TOTAL
+    let total =
+    parseInt(
+        localStorage.getItem(
+            "puntajeTotal"
+        )
+    ) || 0;
+
+    localStorage.setItem(
+        "puntajeTotal",
+        total + puntaje
+    );
+
+    confetti({
+
+        particleCount: 300,
+        spread: 120
+
+    });
+
+    document.querySelector(
+        ".contenedor-juego"
+    ).innerHTML = `
+
+        <h1>${titulo}</h1>
+
+        <h2>${mensaje}</h2>
+
+        <br>
+
+        <h2>
+            ⭐ Puntaje Final:
+            ${puntaje}
+        </h2>
+
+        <br>
+
+        <button onclick="location.href='final.html'">
+
+            Finalizar
+
+        </button>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>

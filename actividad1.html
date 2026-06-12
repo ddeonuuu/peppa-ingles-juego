@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Learn Colors</title>
+
+    <link rel="stylesheet" href="css_peppa/style.css">
+
+</head>
+
+<body>
+
+<div class="contenedor-juego borde-rosa">
+
+    <h1>
+        Let's Learn Colors! 🎨
+    </h1>
+
+    <p id="textoInstruccion"
+       class="subtitulo">
+
+       Escucha el color en inglés
+
+    </p>
+
+    <div id="colorTexto"
+         class="pizarra-color">
+
+         RED
+
+    </div>
+
+    <button id="btnEscuchar"
+            class="btn-ui btn-azul"
+            onclick="reproducirColorActual()">
+
+        🔊 Escuchar
+
+    </button>
+
+    <div class="zona-seleccion">
+
+        <p style="
+            font-weight:bold;
+            color:#475569;
+            margin-bottom:15px;">
+
+            Selecciona el color correcto:
+
+        </p>
+
+        <div class="grid-opciones">
+
+            <div class="burbuja-color"
+                 style="background:#ff4d4d;"
+                 onclick="verificarRespuesta('RED')">
+            </div>
+
+            <div class="burbuja-color"
+                 style="background:#4da6ff;"
+                 onclick="verificarRespuesta('BLUE')">
+            </div>
+
+            <div class="burbuja-color"
+                 style="background:#5cd65c;"
+                 onclick="verificarRespuesta('GREEN')">
+            </div>
+
+            <div class="burbuja-color"
+                 style="background:#ffdb4d;"
+                 onclick="verificarRespuesta('YELLOW')">
+            </div>
+
+            <div class="burbuja-color"
+                 style="background:#ff94b8;"
+                 onclick="verificarRespuesta('PINK')">
+            </div>
+
+        </div>
+
+        <div id="mensajeFeedback"></div>
+
+    </div>
+
+    <button class="btn-ui btn-morado"
+            onclick="siguienteColor()">
+
+        Next Color ➔
+
+    </button>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script src="js_peppa/script.js"></script>
+
+</body>
+</html>
